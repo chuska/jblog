@@ -16,12 +16,12 @@ public class UserContorller {
 	@RequestMapping("/loginform")
 	public String userLoginForm() {
 				
-		return "/user/login-from";
+		return "/user/login-form";
 	}
 	
 	@RequestMapping("/registerform")
 	public String userRegisterForm() {
 				
-		return "/user/login-from";
+		return "/user/login-form";
 	}
 }

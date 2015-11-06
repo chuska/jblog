@@ -15,13 +15,13 @@
     <table class="main-tbl">
       <tr>
       	<td height="30">
-     		<a href=""><strong>로그인</strong></a>
+     		<a href="/jblog/user/loginform"><strong>로그인</strong></a>
      		&nbsp;&nbsp;
-     		<a href=""><strong>로그아웃</strong></a>
+     		<a href="/jblog/user"><strong>로그아웃</strong></a>
      		&nbsp;&nbsp;
-     		<a href=""><strong>내 블로그 가기</strong></a>
+     		<a href="/jblog/blog/main"><strong>내 블로그 가기</strong></a>
      		&nbsp;&nbsp;
-			<a href=""><strong>관리자</strong></a>
+			<a href="/jblog/user/list"><strong>관리자</strong></a>
 			&nbsp;&nbsp;
       	</td>
       </tr>      
