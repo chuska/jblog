@@ -15,7 +15,7 @@ public class BlogController {
 	@RequestMapping("/main-detail")
 	public String blogMainDetail() {
 				
-		return "/blog/main";
+		return "/blog/main-detail";
 	}
 	
 	@RequestMapping("/basic")
@@ -30,9 +30,9 @@ public class BlogController {
 		return "/blog/category";
 	}
 	
-	@RequestMapping("/writer")
+	@RequestMapping("/write")
 	public String blogWrite() {
 				
-		return "/blog/writer";
+		return "/blog/write";
 	}
 }
