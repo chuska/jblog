@@ -105,15 +105,38 @@ VALUES(USER_SEQ.nextval, 'dooly','둘리', 'User', '1234', sysdate, sysdate);
 --테스트 데이터
 INSERT INTO BLOG (BLOG_NO, TITLE, TAG, CNT_DISPLAY_POST, STATUS, FILE_NAME) 
 		   VALUES(3, 'firstBlog', '여행#낚시#', 1, 1,'');
+		   
 INSERT INTO CATEGORY (BLOG_NO, CATEGORY_NO, CATEGORY_NAME,DISPLAY_TYPE, CNT_DISPLAY_POST, DESCRIPTION, CREATED_DATE, MODIFIED_DATE) 
 		       VALUES(3, '1', '여행','TYPE', 1, '잘못만듬', SYSDATE, SYSDATE);
+		       
 INSERT INTO POST (POST_NO, CATEGORY_NO, TITLE, CONTENT, CREATED_DATE, MODIFIED_DATE) 
 		       VALUES(1, '1', '여행','국내여행', SYSDATE, SYSDATE);
+		       
 INSERT INTO POST (POST_NO, CATEGORY_NO, TITLE, CONTENT, CREATED_DATE, MODIFIED_DATE) 
-		       VALUES(2, '1', '여행2','국내여행2', SYSDATE, SYSDATE);			   
+		       VALUES(2, '1', '여행2','국내여행2', SYSDATE, SYSDATE);		
+		       
 INSERT INTO COMMENTS (COMMENTS_NO, CONTENT, CREATED_DATE, POST_NO) 
 		       VALUES(1, '잘봣습니다', SYSDATE, 1);	
 		   
+--blogMainList		       
+select C.USER_NAME , 
+	   TO_CHAR(D.MODIFIED_DATE,'yyyy/mm/dd') AS MODIFIED_DATE, 
+	   D.TITLE
+	   from 
+			(select A.*, B.CATEGORY_NO from 
+			(select b.BLOG_NO, a.USER_NAME 
+				from blog_user a, blog b where a.USER_NO = b.BLOG_NO) A,
+				CATEGORY B WHERE A.BLOG_NO = B.BLOG_NO AND B.CATEGORY_NO =#{categoryNo }) C,
+			POST D WHERE C.CATEGORY_NO = D.CATEGORY_NO
+--blog CATEGORY List
+select CATEGORY_NO as categoryNo, CATEGORY_NAME as categoryName 
+		from category where BLOG_NO = #{blogNo }
 
-
+-- Comment count
+select POST_NO,COUNT(comments_no) as commentCnt from
+	(select POST_NO ,COMMENTS_NO
+		from COMMENTS  
+		where POST_NO in (select POST_NO from post a, CATEGORY b where  a.CATEGORY_NO = a.CATEGORY_NO))  
+	GROUP BY POST_NO		
+	
 COMMIT;

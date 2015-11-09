@@ -23,18 +23,15 @@
 		      	<td width="20px">&nbsp;</td>
 		      	<td width="530px" valign="top">
 			      	<!-- 포스트 시작 -->
-			      	<table>
-			      		<tr><td class="posttitle"><a href="">JavaOne 컨퍼런스가 열립니다.</a></td></tr>
-			      		<tr><td class="postdate">[2015/06/06] posted by kickscar, 덧글 1</td></tr>
-			      	</table>
-			      	<table>
-			      		<tr><td class="posttitle"><a href="">JBlog를 만듭시다</a></td></tr>
-			      		<tr><td class="postdate">[2015/06/10] posted by kickscar, 덧글 1</td></tr>
-			      	</table>
-			      	<table>
-			      		<tr><td class="posttitle"><a href="">Project Go! Go!</a></td></tr>
-			      		<tr><td class="postdate">[2015/06/23] posted by kickscar, 덧글 1</td></tr>
-			      	</table>
+			      	<c:forEach items="${mainList}" var="list" varStatus="status">
+				      	<table>
+				      		<tr><td class="posttitle"><a href=""> ${list.TITLE}</a></td></tr>
+				      		<tr><td class="postdate">[${list.MODIFIED_DATE} ] posted by  ${list.USER_NAME }, 덧글 ${list.CNT_DISPLAY_POST}
+				      		
+				      		</td></tr>
+				      	</table>
+		      	    </c:forEach> 
+			   
 			      	<!-- 포스트 끝-->      	
 		      	</td>
 		      	<td width="20px">&nbsp;</td>
@@ -52,9 +49,11 @@
 		      		<tr><td><img height="80px" src="/jblog/assets/images/j2eelogo.jpg"></td></tr>
 		      		<tr><td height="5px">&nbsp;</td></tr>
 		      		<tr><td class="categorytitle">카테고리</td></tr>
-		      		<tr><td class="categoryitem"><a class="title" href="#">프로그래밍</a></td></tr>
-	    	  		<tr><td class="categoryitem"><a class="title" href="#">여행</a></td></tr>
-	      			<tr><td class="categoryitem"><a class="title" href="#">사진</a></td></tr>	      		
+		      		<c:forEach items="${cateList}" var="vo" varStatus="status">
+		      		<tr><td class="categoryitem"><a class="title" href="#">${vo.categoryName }</a></td></tr>
+		      		</c:forEach>
+	    	  		<!-- <tr><td class="categoryitem"><a class="title" href="#">여행</a></td></tr>
+	      			<tr><td class="categoryitem"><a class="title" href="#">사진</a></td></tr>	    -->   		
 		      	</table>
 		      	<!-- 로그인, 관리자 메뉴, 로고, 카테고리 끝 -->
 		      	</td>
