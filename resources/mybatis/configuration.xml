@@ -4,6 +4,9 @@
 	<typeAliases>
 		<typeAlias alias="BlogUserVo" type="com.bit2015.jblog.vo.BlogUserVo" />
 		<typeAlias alias="BlogVo" type="com.bit2015.jblog.vo.BlogVo" />
+		<typeAlias alias="CategoryVo" type="com.bit2015.jblog.vo.CategoryVo" />
+		<typeAlias alias="CommentsVo" type="com.bit2015.jblog.vo.CommentsVo" />
+		<typeAlias alias="PostVo" type="com.bit2015.jblog.vo.PostVo" />
 	</typeAliases>
 
 	<mappers>
