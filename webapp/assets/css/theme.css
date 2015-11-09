@@ -39,21 +39,23 @@ table.main-tbl		{ width:100%; border-collapse:collapse; border:0 }
 table.main-tbl td	{ padding:10px 0; text-align:center }
 .s-logo				{ width:147px; height:86px; font-size:0; padding-left:-100px; margin:100px auto 0 auto; background:url(/jblog/assets/images/logo.jpg) 0 0 no-repeat }		
 
-.form-login			{ width:250px; margin:40px auto 0 auto }
+.form-login			              { width:250px; margin:40px auto 0 auto }
 .form-login label,
-.form-login input	{ display:block; float:left; margin-top:15px }
-.form-login label	{ width:60px; text-align:right }
-.form-login input	{ margin-left:10px; }
+.form-login input	              { display:block; float:left; margin-top:15px }
+.form-login label	              { width:60px; text-align:right }
+.form-login input	              { margin-left:10px; }
 .form-login input[type='submit'],
-.form-login input[type='reset']	 { margin-top:10px; width:50px }
-.form-login input[type='submit'] { margin-left:80px } 	
-.form-login p       {text-align:center; padding-left:20px; padding-top:80px;}
+.form-login input[type='reset']	  { margin-top:10px; width:50px }
+.form-login input[type='submit']  { margin-left:80px } 	
+.form-login p                     {text-align:center; padding-left:20px; padding-top:80px;}
 
 .form-r-user						{ width:250px; margin:60px auto 0 auto }
 .form-r-user label,
-.form-r-user input					{ display:block; float:left; margin-top:15px }
-.form-r-user input					{ margin-left:10px; }
-.form-r-user label					{ width:60px; text-align:right }
+.form-r-user input					{ display:block; float:left; margin-top:15px; }
+.form-r-user input					{ margin-left:10px; width:110px}
+.form-r-user input[type='button']   {width:55px}
+.form-r-user input[type='radio']    {width:20px}
+.form-r-user label					{ width:48px; text-align:right }
 .form-r-user input[type='submit']	{ margin:20px 0 10px 130px; width:50px }
 
 ul.menu				{ width:600px; margin:20px auto 10px auto; list-style-type:none }

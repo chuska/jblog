@@ -11,7 +11,7 @@
 </head>
 <body>
 	<h1 class="s-logo">jBlog</h1>
-	<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
+	<c:import url="/WEB-INF/views/include/user_header.jsp"></c:import>
 	<div class="user-list">
 		<c:set var='count' value='${fn:length(list) }'></c:set>
 		<h2>블로그 사용자 수 : ${count }명</h2>

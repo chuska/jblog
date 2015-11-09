@@ -74,17 +74,32 @@
 </head>
 <body>
 	<h1 class="s-logo">jBlog</h1>
-	<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
+	<c:import url="/WEB-INF/views/include/user_header.jsp"></c:import>
 	<form class="form-r-user" method="post" action="/jblog/user/register">
-		<label>아이디</label> <input id="id" type="text" name="userId"> <img
-			id="image-checked" src="/jblog/assets/images/checked.png"
-			style="width: 12px; display: none"> <input id="btn-checkid"
-			type="button" value="id 중복체크"> <label>비밀번호</label> <input
-			id="password" type="password" name="password"> <label>이름</label>
-		<input id="name" type="text" name="userName"> <label>권한</label>
-		<label>유저</label> <input type="radio" name="role" value="user"
-			checked="checked"> <label>관리자</label> <input type="radio"
-			name="role" value="admin"><input type="submit" value="등록">
+		<table>
+			<tr>
+				<td><label>아이디</label> <input id="id" type="text" name="userId">
+					<img id="image-checked" src="/jblog/assets/images/checked.png" style="width: 12px; display: none; padding-top:18px; padding-left:4px">
+					<input id="btn-checkid" type="button" value="중복체크"></td>
+			</tr>
+			<tr>
+				<td><label>비밀번호</label> <input id="password" type="password"
+					name="password"></td>
+			</tr>
+			<tr>
+				<td><label>이름</label> <input id="name" type="text"
+					name="userName"></td>
+			</tr>
+			<tr>
+				<td><label>권한</label> <label>유저</label> <input type="radio"
+					name="role" value="user" checked="checked"> <label>관리자</label>
+					<input type="radio" name="role" value="admin"></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="등록"></td>
+			</tr>
+		</table>
+
 	</form>
 </body>
 </html>
