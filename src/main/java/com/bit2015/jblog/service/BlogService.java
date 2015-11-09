@@ -21,11 +21,11 @@ public class BlogService {
 		List<Map<String, Object>> mainList = blogDao.mainList(categoryNo);
 		return mainList;
 	}
-	/*public List<Map<String, Object>> blogCountList(String categoryNo)
+	public List<Map<String, Object>> blogCountList(String categoryNo)
 	{
-		List<Map<String, Object>> mainList = blogDao.countList(categoryNo);
-		return mainList;
-	}*/
+		List<Map<String, Object>> countList = blogDao.countList(categoryNo);
+		return countList;
+	}
 	public List<CategoryVo> blogCategoryList(long blogNo)
 	{
 		List<CategoryVo> cateList = blogDao.categoryList(blogNo);

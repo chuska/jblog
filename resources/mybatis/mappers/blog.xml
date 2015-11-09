@@ -4,15 +4,16 @@
 	<!-- blogMainList -->
 	<select id="mainList" parameterType="string" resultType="map">
 	
-	 select C.USER_NAME ,C.CNT_DISPLAY_POST,
-	   TO_CHAR(D.MODIFIED_DATE,'yyyy/mm/dd') AS MODIFIED_DATE, 
-	   D.TITLE 
-	   from 
-			(select A.*, B.CATEGORY_NO,B.CNT_DISPLAY_POST from 
-			(select b.BLOG_NO, a.USER_NAME 
-				from blog_user a, blog b where a.USER_NO = b.BLOG_NO) A,
-				CATEGORY B WHERE A.BLOG_NO = B.BLOG_NO AND B.CATEGORY_NO =#{categoryNo }) C,
-			POST D WHERE C.CATEGORY_NO = D.CATEGORY_NO	;
+		select C.USER_NAME ,
+		   TO_CHAR(D.MODIFIED_DATE,'yyyy/mm/dd') AS MODIFIED_DATE,
+		   D.POST_NO, 
+		   D.TITLE
+		   from 
+				(select A.*, B.CATEGORY_NO from 
+				(select b.BLOG_NO, a.USER_NAME 
+					from blog_user a, blog b where a.USER_NO = b.BLOG_NO) A,
+					CATEGORY B WHERE A.BLOG_NO = B.BLOG_NO AND B.CATEGORY_NO =#{categoryNo }) C,
+				POST D WHERE C.CATEGORY_NO = D.CATEGORY_NO
 	
 	</select>
 	
@@ -22,6 +23,7 @@
 		select CATEGORY_NO as categoryNo, CATEGORY_NAME as categoryName 
 		from category where BLOG_NO = #{blogNo }
 	</select>
+	
 	
 	<select id="commentCount" resultType="map">
 		select POST_NO,COUNT(comments_no) as commentCnt from

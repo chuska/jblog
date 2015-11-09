@@ -22,9 +22,9 @@ public class BlogDao {
 		return list;
 	}
 	
-	public List<CategoryVo> countList(String blogNo){
+	public List<Map<String, Object>> countList(String categoryNo){
 		
-		List<CategoryVo>  list = sqlSession.selectList("blog.categoryList",blogNo);
+		List<Map<String, Object>>  list = sqlSession.selectList("blog.commentCount",categoryNo);
 		return list;
 	}
 	

@@ -26,8 +26,13 @@
 			      	<c:forEach items="${mainList}" var="list" varStatus="status">
 				      	<table>
 				      		<tr><td class="posttitle"><a href=""> ${list.TITLE}</a></td></tr>
-				      		<tr><td class="postdate">[${list.MODIFIED_DATE} ] posted by  ${list.USER_NAME }, 덧글 ${list.CNT_DISPLAY_POST}
-				      		
+				      		<tr><td class="postdate">[${list.MODIFIED_DATE} ] posted by  ${list.USER_NAME },
+				      		 덧글
+				      		<c:forEach items="${countList }" var="countList" varStatus="countStatus">
+				      		<c:if test="${list.POST_NO == countList.POST_NO }">
+				      			${countList.COMMENTCNT }
+				      		</c:if>
+				      		</c:forEach>
 				      		</td></tr>
 				      	</table>
 		      	    </c:forEach> 
