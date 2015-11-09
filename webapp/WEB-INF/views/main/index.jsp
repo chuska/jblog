@@ -15,14 +15,22 @@
     <table class="main-tbl">
       <tr>
       	<td height="30">
+      	<c:choose>
+   		<c:when test='${empty authUser }'>
      		<a href="/jblog/user/loginform"><strong>로그인</strong></a>
      		&nbsp;&nbsp;
-     		<a href="/jblog/user"><strong>로그아웃</strong></a>
+     	</c:when>	
+     	<c:otherwise>
+       		<a href="/jblog/user"><strong>로그아웃</strong></a>
      		&nbsp;&nbsp;
-     		<a href="/jblog/blog/main"><strong>내 블로그 가기</strong></a>
+      		<a href="/jblog/blog/main"><strong>내 블로그 가기</strong></a>
      		&nbsp;&nbsp;
-			<a href="/jblog/user/list"><strong>관리자</strong></a>
+     	<c:when test = '${authUser.role == admin}'> 
+    		<a href="/jblog/user/list"><strong>관리자</strong></a>
 			&nbsp;&nbsp;
+		</c:when>
+		</c:otherwise>
+		</c:choose>
       	</td>
       </tr>      
       <tr>
