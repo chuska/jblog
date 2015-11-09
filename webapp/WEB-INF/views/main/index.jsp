@@ -15,14 +15,22 @@
     <table class="main-tbl">
       <tr>
       	<td height="30">
-     		<a href=""><strong>로그인</strong></a>
+      	<c:choose>
+   		<c:when test='${empty authUser }'>
+     		<a href="/jblog/user/loginform"><strong>로그인</strong></a>
      		&nbsp;&nbsp;
-     		<a href=""><strong>로그아웃</strong></a>
+     	</c:when>	
+     	<c:otherwise>
+       		<a href="/jblog/user"><strong>로그아웃</strong></a>
      		&nbsp;&nbsp;
-     		<a href=""><strong>내 블로그 가기</strong></a>
+      		<a href="/jblog/blog/main"><strong>내 블로그 가기</strong></a>
      		&nbsp;&nbsp;
-			<a href=""><strong>관리자</strong></a>
+     	<c:when test = '${authUser.role == admin}'> 
+    		<a href="/jblog/user/list"><strong>관리자</strong></a>
 			&nbsp;&nbsp;
+		</c:when>
+		</c:otherwise>
+		</c:choose>
       	</td>
       </tr>      
       <tr>
@@ -39,8 +47,26 @@
       		&nbsp;&nbsp;
       		<input type="radio" name="searchCondition">블로거
 		</td>
-      </tr>      
+      </tr>
     </table>
+    <div class="user-list">
+		<c:set var='count' value='${fn:length(list) }'></c:set>
+		<h2>블로그 사용자 수 : ${count }명</h2>
+		<table>
+			<tr>
+				<th>아이디</th>
+				<th>이름</th>
+				<th>가입일</th>
+			</tr>
+			<c:forEach items='${list}' var="vo" varStatus="status">
+				<tr>
+					<td>${ vo.userId}</td>
+					<td>${ vo.userName}</td>
+					<td>${ vo.createdDate}</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
    	</form>
 </body>
 </html>

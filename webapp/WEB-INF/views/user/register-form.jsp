@@ -16,13 +16,13 @@
 		<li>회원등록</li>
 		<li><a href="">로그아웃</a></li>
 	</ul>
-	<form class="form-r-user" method="post" action="">
+	<form class="form-r-user" method="post" action="/jblog/user/register">
 		<label>아이디</label>
 		<input type="text" name="userId">
 		<label>비밀번호</label>
-		<input type="text" name="password">
+		<input type="password" name="password">
 		<label>이름</label>
-		<input type="text" name="name">
+		<input type="text" name="userName">
 		<input type="submit" value="등록">
 	</form>
 </body>

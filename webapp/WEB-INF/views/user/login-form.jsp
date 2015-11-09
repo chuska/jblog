@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>  
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,13 +11,10 @@
 </head>
 <body>
 	<h1 class="s-logo">jBlog</h1>
-	<form class="form-login" method="post" action="#">
-		<label>아이디</label>
-		<input type="text" name="userId">
-		<label>비밀번호</label>
-		<input type="password" name="password">
-		<input type=submit value=확인>
-		<input type="reset" value="취소">
+	<form class="form-login" method="post" action="/jblog/user/login">
+		<label>아이디</label> <input type="text" name="userId"> <label>비밀번호</label>
+		<input type="password" name="password"> <input type=submit
+			value=확인> <input type="reset" value="취소">
 	</form>
 </body>
 </html>

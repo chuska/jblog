@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="blog">
-
+<mapper namespace="user">
+	<select id="list" resultType="BlogUserVo">
+		select user_no userNo,user_id
+		userId,user_name
+		userName,role,password,created_date
+		createdDate,modified_date
+		modifiedDate from blog_user
+	</select>
+	<insert id="insert" parameterType="BlogUserVo">
+		<![CDATA[
+		INSERT INTO BLOG_USER
+		VALUES(user_seq.nextval, #{userId}, #{userName},
+		'user', #{password},
+		sysdate, sysdate)
+		]]>
+	</insert>
+	<select id="getByIdAndPassword" parameterType="BlogUserVo"
+		resultType="BlogUserVo">
+		select user_no
+		userNo,user_id
+		userId,user_name
+		userName,role,password,created_date
+		createdDate,modified_date
+		modifiedDate from blog_user
+		where
+		user_id=#{userId} and
+		password=#{password}
+	</select>
 </mapper>
