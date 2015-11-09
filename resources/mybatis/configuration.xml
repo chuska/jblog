@@ -3,6 +3,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="BlogUserVo" type="com.bit2015.jblog.vo.BlogUserVo" />
+		<typeAlias alias="BlogVo" type="com.bit2015.jblog.vo.BlogVo" />
 	</typeAliases>
 
 	<mappers>
