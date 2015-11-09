@@ -45,8 +45,9 @@ table.main-tbl td	{ padding:10px 0; text-align:center }
 .form-login label	{ width:60px; text-align:right }
 .form-login input	{ margin-left:10px; }
 .form-login input[type='submit'],
-.form-login input[type='reset']	 { margin-top:30px; width:50px }
+.form-login input[type='reset']	 { margin-top:10px; width:50px }
 .form-login input[type='submit'] { margin-left:80px } 	
+.form-login p       {text-align:center; padding-left:20px; padding-top:80px;}
 
 .form-r-user						{ width:250px; margin:60px auto 0 auto }
 .form-r-user label,

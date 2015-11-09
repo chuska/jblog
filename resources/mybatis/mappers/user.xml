@@ -2,30 +2,71 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user">
 	<select id="list" resultType="BlogUserVo">
-		select user_no userNo,user_id
-		userId,user_name
-		userName,role,password,created_date
-		createdDate,modified_date
-		modifiedDate from blog_user
+		select
+		user_id as
+		userId,
+		user_name as
+		userName,
+		created_date as
+		createdDate
+		from blog_user
 	</select>
-	<insert id="insert" parameterType="BlogUserVo">
+	<insert id="userInsert" parameterType="BlogUserVo">
+		<selectKey keyProperty="userNo" resultType="long" order="BEFORE">
+			select user_seq.nextval from dual
+		</selectKey>
+		INSERT
+		INTO BLOG_USER
+		VALUES(#{userNo},
+		#{userId},
+		#{userName},
+		#{role},
+		#{password},
+		sysdate,
+		sysdate)
+	</insert>
+	<insert id="blogInsert" parameterType="BlogUserVo">
 		<![CDATA[
-		INSERT INTO BLOG_USER
-		VALUES(user_seq.nextval, #{userId}, #{userName},
-		'user', #{password},
-		sysdate, sysdate)
+		INSERT
+		INTO BLOG
+		VALUES(#{userNo},
+		'title',
+		'tag',
+		0,
+		'status',
+		'filename')
+		]]>
+	</insert>
+	<insert id="categoryInsert" parameterType="BlogUserVo">
+		<![CDATA[
+		INSERT
+		INTO CATEGORY
+		VALUES(#{userNo},
+		CATEGORY_SEQ.NEXTVAL,
+		'미분류',
+		'displtype',
+		0,
+		'description',
+		sysdate,
+		sysdate)
 		]]>
 	</insert>
 	<select id="getByIdAndPassword" parameterType="BlogUserVo"
 		resultType="BlogUserVo">
-		select user_no
-		userNo,user_id
-		userId,user_name
-		userName,role,password,created_date
-		createdDate,modified_date
-		modifiedDate from blog_user
+		select
+		user_no as userNo,
+		role
+		from blog_user
 		where
-		user_id=#{userId} and
+		user_id=#{userId}
+		and
 		password=#{password}
+	</select>
+	<select id="getById" parameterType="string" resultType="BlogUserVo">
+		select
+		user_id as userId
+		from blog_user
+		where
+		user_id=#{id}
 	</select>
 </mapper>

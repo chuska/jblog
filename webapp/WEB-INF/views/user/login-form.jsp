@@ -13,8 +13,11 @@
 	<h1 class="s-logo">jBlog</h1>
 	<form class="form-login" method="post" action="/jblog/user/login">
 		<label>아이디</label> <input type="text" name="userId"> <label>비밀번호</label>
-		<input type="password" name="password"> <input type=submit
-			value=확인> <input type="reset" value="취소">
+		<input type="password" name="password">
+		<c:if test="${param.result=='error' }">
+			<p>로그인이 실패 했습니다.</p>
+		</c:if>
+		<input type=submit value=확인> <input type="reset" value="취소">
 	</form>
 </body>
 </html>

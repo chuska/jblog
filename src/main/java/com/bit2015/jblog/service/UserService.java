@@ -19,11 +19,20 @@ public class UserService {
 	}
 
 	public void insert(BlogUserVo vo) {
-		userDao.insert(vo);
+		userDao.userInsert(vo);
+		userDao.blogInsert(vo);
+		for (int i = 0; i < 3; i++) {
+			userDao.categoryInsert(vo);
+		}
 	}
 
 	public BlogUserVo login(BlogUserVo vo) {
 		BlogUserVo blogUserVo = userDao.login(vo);
 		return blogUserVo;
+	}
+
+	public BlogUserVo getUser(String id) {
+		BlogUserVo vo = userDao.get(id);
+		return vo;
 	}
 }

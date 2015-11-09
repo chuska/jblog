@@ -11,11 +11,7 @@
 </head>
 <body>
 	<h1 class="s-logo">jBlog</h1>
-	<ul class="menu">
-		<li>회원목록</li>
-		<li><a href="">회원등록</a></li>
-		<li><a href="">로그아웃</a></li>
-	</ul>
+	<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 	<div class="user-list">
 		<c:set var='count' value='${fn:length(list) }'></c:set>
 		<h2>블로그 사용자 수 : ${count }명</h2>

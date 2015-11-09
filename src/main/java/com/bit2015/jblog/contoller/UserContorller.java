@@ -2,6 +2,8 @@ package com.bit2015.jblog.contoller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,8 +43,19 @@ public class UserContorller {
 	}
 
 	@RequestMapping("/login")
-	public String userLogin(@ModelAttribute BlogUserVo vo) {
+	public String userLogin(@ModelAttribute BlogUserVo vo, HttpSession session) {
 		BlogUserVo blogUserVo = userService.login(vo);
+		if (blogUserVo == null) {
+			return "redirect:/user/loginform?result=error";
+		}
+		session.setAttribute("authUser", blogUserVo);
+		return "redirect:/user/list";
+	}
+
+	@RequestMapping("/logout")
+	public String userLogout(HttpSession session) {
+		session.removeAttribute("authUser");
+		session.invalidate();
 		return "redirect:/user/list";
 	}
 }

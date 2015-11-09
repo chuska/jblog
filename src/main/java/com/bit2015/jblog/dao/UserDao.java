@@ -18,13 +18,26 @@ public class UserDao {
 		return list;
 	}
 
-	public void insert(BlogUserVo vo) {
-		sqlSession.insert("user.insert", vo);
+	public void userInsert(BlogUserVo vo) {
+		sqlSession.insert("user.userInsert", vo);
+	}
+
+	public void blogInsert(BlogUserVo vo) {
+		sqlSession.insert("user.blogInsert", vo);
+	}
+
+	public void categoryInsert(BlogUserVo vo) {
+		sqlSession.insert("user.categoryInsert", vo);
 	}
 
 	public BlogUserVo login(BlogUserVo vo) {
 		BlogUserVo blogUserVo = sqlSession.selectOne("user.getByIdAndPassword",
 				vo);
 		return blogUserVo;
+	}
+
+	public BlogUserVo get(String id) {
+		BlogUserVo vo = sqlSession.selectOne("user.getById", id);
+		return vo;
 	}
 }
