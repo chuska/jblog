@@ -12,7 +12,7 @@
 		<![CDATA[
 		INSERT INTO BLOG_USER
 		VALUES(user_seq.nextval, #{userId}, #{userName},
-		'role', #{password},
+		'user', #{password},
 		sysdate, sysdate)
 		]]>
 	</insert>

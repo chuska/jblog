@@ -43,7 +43,6 @@ public class UserContorller {
 	@RequestMapping("/login")
 	public String userLogin(@ModelAttribute BlogUserVo vo) {
 		BlogUserVo blogUserVo = userService.login(vo);
-		System.out.println(blogUserVo);
 		return "redirect:/user/list";
 	}
 }

@@ -23,7 +23,8 @@ public class UserDao {
 	}
 
 	public BlogUserVo login(BlogUserVo vo) {
-		BlogUserVo blogUserVo = sqlSession.selectOne("user.getByIdAndPassword",vo);
+		BlogUserVo blogUserVo = sqlSession.selectOne("user.getByIdAndPassword",
+				vo);
 		return blogUserVo;
 	}
 }
