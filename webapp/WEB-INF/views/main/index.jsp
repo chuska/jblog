@@ -47,8 +47,26 @@
       		&nbsp;&nbsp;
       		<input type="radio" name="searchCondition">블로거
 		</td>
-      </tr>      
+      </tr>
     </table>
+    <div class="user-list">
+		<c:set var='count' value='${fn:length(list) }'></c:set>
+		<h2>블로그 사용자 수 : ${count }명</h2>
+		<table>
+			<tr>
+				<th>아이디</th>
+				<th>이름</th>
+				<th>가입일</th>
+			</tr>
+			<c:forEach items='${list}' var="vo" varStatus="status">
+				<tr>
+					<td>${ vo.userId}</td>
+					<td>${ vo.userName}</td>
+					<td>${ vo.createdDate}</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
    	</form>
 </body>
 </html>
