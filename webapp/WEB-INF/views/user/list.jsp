@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>  
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,23 +17,21 @@
 		<li><a href="">로그아웃</a></li>
 	</ul>
 	<div class="user-list">
-		<h2>블로그 사용자 수 : 2명</h2>
+		<c:set var='count' value='${fn:length(list) }'></c:set>
+		<h2>블로그 사용자 수 : ${count }명</h2>
 		<table>
 			<tr>
 				<th>아이디</th>
 				<th>이름</th>
 				<th>가입일</th>
 			</tr>
-			<tr>
-				<td>kickscar</td>
-				<td>안대혁</td>
-				<td>2015-07-10</td>
-			</tr>
-			<tr>
-				<td>kickscar</td>
-				<td>안대혁</td>
-				<td>2015-07-10</td>
-			</tr>			
+			<c:forEach items='${list}' var="vo" varStatus="status">
+				<tr>
+					<td>${ vo.userId}</td>
+					<td>${vo.userName}</td>
+					<td>${ vo.createdDate}</td>
+				</tr>
+			</c:forEach>
 		</table>
 	</div>
 </body>
