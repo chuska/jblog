@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.bit2015.jblog.annotation.Auth;
 import com.bit2015.jblog.service.UserService;
 import com.bit2015.jblog.vo.BlogUserVo;
 
@@ -19,6 +20,7 @@ public class UserContorller {
 	@Autowired
 	UserService userService;
 
+	@Auth
 	@RequestMapping("/list")
 	public String userList(Model model) {
 		List<BlogUserVo> list = userService.getList();
@@ -31,11 +33,13 @@ public class UserContorller {
 		return "/user/login-form";
 	}
 
+	@Auth
 	@RequestMapping("/registerform")
 	public String userRegisterForm() {
 		return "/user/register-form";
 	}
 
+	@Auth
 	@RequestMapping("/register")
 	public String userRegister(@ModelAttribute BlogUserVo vo) {
 		userService.insert(vo);
