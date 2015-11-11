@@ -10,6 +10,7 @@
 		created_date as
 		createdDate
 		from blog_user
+		order by createdDate
 	</select>
 	<insert id="userInsert" parameterType="BlogUserVo">
 		<selectKey keyProperty="userNo" resultType="long" order="BEFORE">
