@@ -25,7 +25,7 @@ public class BlogController {
 	BlogService blogService;
 	
 	@RequestMapping("/main")
-	public String blogMain(@RequestParam(value="bl_no",required=true,defaultValue="3") long bl_no,
+	public String blogMain(@RequestParam(value="blogNo",required=true,defaultValue="3") long bl_no,
 						   Model model){
 		
 		List<CategoryVo> cateList = blogService.blogCategoryList(bl_no);
