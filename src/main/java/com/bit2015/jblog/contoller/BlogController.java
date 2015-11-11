@@ -25,20 +25,22 @@ public class BlogController {
 	BlogService blogService;
 	
 	@RequestMapping("/main")
-	public String blogMain(@RequestParam(value="blogNo",required=true,defaultValue="3") long bl_no,
+	public String blogMain(@RequestParam(value="blogNo",required=true,defaultValue="3") long blogNo,
 						   Model model){
 		
-		List<CategoryVo> cateList = blogService.blogCategoryList(bl_no);
-		List<Map<String, Object>> mainList = blogService.blogMainList(bl_no);
-		List<Map<String, Object>> countList = blogService.blogCountList(bl_no);
-		
-		Map<String, Object> blogInfoMap = mainList.get(1);
-		
+		List<CategoryVo> cateList = blogService.blogCategoryList(blogNo);
+		List<Map<String, Object>> mainList = blogService.blogMainList(blogNo);
+		List<Map<String, Object>> countList = blogService.blogCountList(blogNo);
+		BlogVo blogVo = blogService.blogBlogInfo(blogNo);
+		System.out.println(cateList);
+		System.out.println(mainList);
+		System.out.println(countList);
+	
 		System.out.println( mainList);
 		System.out.println( countList);
-		model.addAttribute("blogNo", bl_no);
-		model.addAttribute("title", blogInfoMap.get("BLOG_TITLE"));
-		model.addAttribute("tag", blogInfoMap.get("TAG"));
+		model.addAttribute("blogNo", blogNo);
+		model.addAttribute("title", blogVo.getTitle());
+		model.addAttribute("tag", blogVo.getTag());
 		model.addAttribute("cateList", cateList);
 		model.addAttribute("mainList", mainList);
 		model.addAttribute("countList", countList);
@@ -91,12 +93,14 @@ public class BlogController {
 	
 	@RequestMapping("/category")
 	public String blogCategory( @RequestParam("blogNo") long blogNo, Model model) {
-				
-		List<CategoryVo> categoryList = blogService.blogCategoryList(blogNo);
+		
+		//List<CategoryVo> categoryList = blogService.blogCategoryList(blogNo);
+		//System.out.println("categoryList = "+ categoryList);
 		BlogVo blogVo = blogService.blogBlogInfo(blogNo);
 		model.addAttribute("title",blogVo.getTitle());
 		model.addAttribute("tag",blogVo.getTag());
-		model.addAttribute("categoryList",categoryList);
+		model.addAttribute("blogVo",blogVo);
+		//model.addAttribute("categoryList",categoryList);
 		return "/blog/category";
 	}
 	

@@ -32,7 +32,7 @@
 						<c:otherwise>
 							<a href="/jblog/user/logout"><strong>로그아웃</strong></a>
      						&nbsp;&nbsp;
-      						<a href="/jblog/blog/main"><strong>내 블로그 가기</strong></a>
+      						<a href="/jblog/blog/main?blogNo=${authUser.userNo}"><strong>내 블로그 가기</strong></a>
      						&nbsp;&nbsp;
      						<c:if test='${authUser.role == "admin"}'>
 								<a href="/jblog/user/list"><strong>관리자</strong></a>

@@ -23,7 +23,7 @@ var fetchList = function(){
 
 		dataType: "json",
 
-		data: "bl_no="+$("#blogNo").val(),
+		data: "blogNo="+$("#blogNo").val(),
 
 		contentType: 'application/json',
 		

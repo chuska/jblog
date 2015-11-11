@@ -46,8 +46,7 @@ public class BlogDao {
 
 	public List<CategoryVo> getCategoryList(long blogNo) {
 
-		List<CategoryVo> list = sqlSession.selectList("blog.getCategoryList",
-				blogNo);
+		List<CategoryVo> list = sqlSession.selectList("blog.getCategoryList",blogNo);
 		return list;
 	}
 

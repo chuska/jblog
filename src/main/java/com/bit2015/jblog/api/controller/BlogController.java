@@ -24,7 +24,7 @@ public class BlogController {
 	
 	@ResponseBody
 	@RequestMapping("/category")
-	public Map<String, Object> categoryList(@RequestParam(value="bl_no",required=true,defaultValue="3") long blogNo,Model model)
+	public Map<String, Object> categoryList(@RequestParam(value="blogNo",required=true,defaultValue="3") long blogNo,Model model)
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
 		
