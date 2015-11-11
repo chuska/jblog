@@ -2,7 +2,7 @@ package com.bit2015.jblog.vo;
 
 public class CategoryVo {
 	private Long blogNo;
-	private String categoryNo;
+	private Long categoryNo;
 	private String categoryName;
 	private String displayType;
 	private Long cntDisplayPost;
@@ -18,11 +18,11 @@ public class CategoryVo {
 		this.blogNo = blogNo;
 	}
 
-	public String getCategoryNo() {
+	public Long getCategoryNo() {
 		return categoryNo;
 	}
 
-	public void setCategoryNo(String categoryNo) {
+	public void setCategoryNo(Long categoryNo) {
 		this.categoryNo = categoryNo;
 	}
 

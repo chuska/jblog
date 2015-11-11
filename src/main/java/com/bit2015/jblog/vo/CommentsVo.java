@@ -2,9 +2,20 @@ package com.bit2015.jblog.vo;
 
 public class CommentsVo {
 	private Long commentsNo;
+	private String commentUserName;
 	private Long postNo;
 	private String content;
 	private String createdDate;
+
+	
+	
+	public String getCommentUserName() {
+		return commentUserName;
+	}
+
+	public void setCommentUserName(String commentUserName) {
+		this.commentUserName = commentUserName;
+	}
 
 	public Long getCommentsNo() {
 		return commentsNo;

@@ -11,25 +11,16 @@
 </head>
 <body class="jblog">
 	<div class="continer">
-		<div class="head">
-			<h1 class="blogtitle">J2EE 이야기</h1>
-			<p class="blogtag">
-				자바, 컨퍼런스, java
-			</p>
-			<ul>
-		      <li><a href="">로그아웃</a></li>
-		      <li><a href="">내 블로그 가기</a></li>
-		    </ul>  
-		</div>
+		<c:import url="/WEB-INF/views/include/blog_header.jsp"></c:import>
 	    <table class="content">
 	      <tr><td height="10" colspan="10">&nbsp;</td></tr>
 	      <tr>
 	      	<td height="10" width="20">&nbsp;</td>
 	      	<td width="530" valign="top" class="tdcontent">
 		      	<!-- 메뉴 시작 -->     
-		      	<a class="title" href="">기본설정</a>
+		      	<a class="title" href="/jblog/blog/basic?blogNo=${blogNo }">기본설정</a>
 		      	&nbsp;&nbsp; 
-	    	  	<a class="title" href="">카테고리</a>
+	    	  	<a class="title" href="/jblog/blog/category?blogNo=${blogNo }">카테고리</a>
 	    	  	&nbsp;&nbsp;
 	      		<strong>글작성</strong>
 	      		&nbsp;&nbsp;
@@ -40,20 +31,22 @@
 	      <tr>
 	      	<td height="10">&nbsp;</td>
 	      	<td>
-	      	<!-- 작업 화면  시작 -->           
+	      	<!-- 작업 화면  시작 -->     
+	      	<form action="/jblog/blog/writer-insert" method="post">      
 	      	<table>
 	      		<tr>
 	      			<td width="50" class="inputlabel">제목 :</td>
 	      			<td width="390">
-	      				<input class="inputtext" type="text" size="60" name="blogtitle">
+	      				<input class="inputtext" type="text" size="60" name="title">
+	      				<input type="hidden" id="blogNo" name="blogNo" value="${blogNo }"/>
 	      			</td>
 	      			<td width="300">
-	      			<select class="inputtextarea">
-	      				<option>미분류</option>
-	      				<option>프로그래밍</option>
-	      				<option>여행</option>
-	      				<option>사진</option>
-	      			</select></td>
+		      			<select class="inputtextarea" name="categoryNo">
+		      				<c:forEach items="${categoryList}" var="cateList" varStatus="status">
+		      				<option value="${cateList.categoryNo}">${cateList.categoryName}</option>
+		      				</c:forEach>
+		      			</select>
+	      			</td>
 	      		</tr>
 	      		<tr>
 	      			<td width="50" class="inputlabel">내용 :</td>
@@ -64,6 +57,7 @@
 	      			<td colspan="10" align="center">&nbsp;<input type="submit" value="확인"></td>
 	      		</tr>
 	      	</table>
+	      	</form>
 	      	<!-- 작업 화면  끝 -->      
 	      	</td>
 	      </tr>

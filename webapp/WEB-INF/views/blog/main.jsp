@@ -11,12 +11,7 @@
 </head>
 <body class="jblog">
 	<div class="continer">
-		<div class="head">
-			<h1 class="blogtitle">J2EE 이야기</h1>
-			<p class="blogtag">
-				자바, 컨퍼런스, java
-			</p>
-		</div>
+		<c:import url="/WEB-INF/views/include/blog_header.jsp"></c:import>
 	    <table class="content">
 			<tr><td height="10px">&nbsp;</td></tr>
 			<tr>
@@ -25,7 +20,7 @@
 			      	<!-- 포스트 시작 -->
 			      	<c:forEach items="${mainList}" var="list" varStatus="status">
 				      	<table>
-				      		<tr><td class="posttitle"><a href=""> ${list.TITLE}</a></td></tr>
+				      		<tr><td class="posttitle"><a href="/jblog/blog/maindetail?blogNo=${blogNo }&postNo=${list.POST_NO}"> ${list.POST_TITLE}</a></td></tr>
 				      		<tr><td class="postdate">[${list.MODIFIED_DATE} ] posted by  ${list.USER_NAME },
 				      		 덧글
 				      		<c:forEach items="${countList }" var="countList" varStatus="countStatus">
@@ -47,7 +42,7 @@
 		      			<td>
 				      		<a href="/toLogin">로그인</a>&nbsp;&nbsp;
 				      		<a href="/logout">로그아웃</a>&nbsp;&nbsp;
-		   					<a href="/kickscar/admin">블로그 관리</a>
+		   					<a href="/jblog/blog/basic?blogNo=${blogNo }&title=${title}&tag=${tag}">블로그 관리</a>
 			      		</td>
 			      	</tr>
 		      		<tr><td height="5px">&nbsp;</td></tr>

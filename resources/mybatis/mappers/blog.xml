@@ -4,32 +4,91 @@
 	<!-- blogMainList -->
 	<select id="mainList" parameterType="string" resultType="map">
 	
-		select C.USER_NAME ,
-		   TO_CHAR(D.MODIFIED_DATE,'yyyy/mm/dd') AS MODIFIED_DATE,
-		   D.POST_NO, 
-		   D.TITLE
-		   from 
-				(select A.*, B.CATEGORY_NO from 
-				(select b.BLOG_NO, a.USER_NAME 
-					from blog_user a, blog b where a.USER_NO = b.BLOG_NO) A,
-					CATEGORY B WHERE A.BLOG_NO = B.BLOG_NO AND B.CATEGORY_NO =#{categoryNo }) C,
-				POST D WHERE C.CATEGORY_NO = D.CATEGORY_NO
+		select C.USER_NAME ,C.TITLE AS BLOG_TITLE, C.TAG,
+	   TO_CHAR(D.MODIFIED_DATE,'yyyy/mm/dd') AS MODIFIED_DATE,
+	   D.POST_NO, 
+	   D.TITLE AS POST_TITLE
+	   from 
+			(select A.*, B.CATEGORY_NO from 
+			(select b.BLOG_NO, b.TITLE,b.TAG, a.USER_NAME 
+				from blog_user a, blog b where a.USER_NO = b.BLOG_NO) A,
+				CATEGORY B WHERE A.BLOG_NO = #{blogNo} AND B.CATEGORY_NO =(select min(category_no) from category where blog_no = B.BLOG_NO)) C,
+			POST D WHERE C.CATEGORY_NO = D.CATEGORY_NO
 	
 	</select>
 	
-	<!-- blogCategoryList -->
-	
-	<select id="categoryList" parameterType="long" resultType="CategoryVo">
-		select CATEGORY_NO as categoryNo, CATEGORY_NAME as categoryName 
-		from category where BLOG_NO = #{blogNo }
-	</select>
-	
-	
-	<select id="commentCount" resultType="map">
+	<!-- blog Comment Count  -->
+	<select id="getCommentCount" resultType="map" parameterType="long">
 		select POST_NO,COUNT(comments_no) as commentCnt from
 		(select POST_NO ,COMMENTS_NO
 			from COMMENTS  
-			where POST_NO in (select POST_NO from post a, CATEGORY b where  a.CATEGORY_NO = #{categoryNo }))  
+			where POST_NO in (select POST_NO from post a, CATEGORY b where  a.CATEGORY_NO =(select min(category_no) from category where blog_no = #{blogNo})))  
 		GROUP BY POST_NO
 	</select>
+	
+	<!-- basicBlogInfo  -->
+	<select id="getBasicBlogInfo" parameterType="long" resultType="BlogVo">
+		select BLOG_NO as blogNo, TITLE as title ,TAG as tag from blog where blog_no = #{blogNo }
+	</select>
+	
+	<update id="updateBlogInfo" parameterType="BlogVo" >
+		UPDATE BLOG SET TITLE = #{title}, TAG=#{tag } WHERE BLOG_NO = #{blogNo }
+	</update>
+	
+	
+	<!-- blogCategoryList -->
+	<select id="getCategoryList" parameterType="long" resultType="CategoryVo">
+		select CATEGORY_NO as categoryNo, CATEGORY_NAME as categoryName,
+		 DISPLAY_TYPE as displayType, CNT_DISPLAY_POST as cntDisplayPost,
+		 DESCRIPTION as description,MODIFIED_DATE as modifiedDate
+		from category where BLOG_NO = #{blogNo } ORDER BY MODIFIED_DATE DESC
+	</select>
+	
+	<select id="getCategory" parameterType="CategoryVo" resultType="CategoryVo">
+		select CATEGORY_NO as categoryNo, CATEGORY_NAME as categoryName,
+		 DISPLAY_TYPE as displayType, CNT_DISPLAY_POST as cntDisplayPost,
+		 DESCRIPTION as description,MODIFIED_DATE as modifiedDate
+		from category where BLOG_NO = #{blogNo } AND CATEGORY_NO = #{categoryNo } 
+	</select>
+	
+	<!-- blogCategoryInsert -->
+	<insert id="categoryInsert" parameterType="CategoryVo">
+		<selectKey keyProperty="categoryNo" resultType="long" order="BEFORE">
+			SELECT CATEGORY_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO CATEGORY (BLOG_NO, CATEGORY_NO, CATEGORY_NAME,DISPLAY_TYPE, CNT_DISPLAY_POST, DESCRIPTION, CREATED_DATE, MODIFIED_DATE) 
+		       VALUES(#{blogNo }, #{categoryNo }, #{categoryName }, #{displayType }, 0, #{description }, SYSDATE, SYSDATE)
+	</insert>
+	
+	<delete id="categoryDelete" parameterType="long">
+		DELETE FROM CATEGORY WHERE CATEGORY_NO = #{categoryNo }
+	</delete>
+	
+	<!-- post -->
+	<insert id="postInsert">
+		INSERT INTO POST (POST_NO, CATEGORY_NO, TITLE, CONTENT, CREATED_DATE, MODIFIED_DATE)
+				VALUES(POST_SEQ.NEXTVAL, #{categoryNo }, #{title}, #{content}, SYSDATE, SYSDATE )
+	</insert>
+	
+	<select id="getPostInfo" parameterType="long" resultType="map">
+		  SELECT a.USER_NAME,b.TITLE, c.* FROM BLOG_USER a,BLOG b, 
+		  (SELECT b.BLOG_NO, 
+		       a.POST_NO , 
+			   a.CATEGORY_NO , 
+			   a.TITLE AS POST_TITLE, 
+			   a.CONTENT AS POST_CONTENT, 
+			   TO_CHAR(a.MODIFIED_DATE,'yyyy/mm/dd') as modifiedDate 
+			FROM POST a,CATEGORY b WHERE a.CATEGORY_NO = b.CATEGORY_NO AND POST_NO =#{postNo }) c
+			WHERE a.USER_NO = b.BLOG_NO AND b.BLOG_NO = c.BLOG_NO
+	</select>
+	<!-- comments -->
+	
+	<select id="getCommentsList" parameterType="long" resultType="CommentsVo">
+		 SELECT COMMENTS_NO AS commentsNo,
+		 		COMMENTS_USER_NAME AS commentUserName,
+		 		CONTENT as content,
+		 		TO_CHAR(CREATED_DATE ,'yyyy/mm/dd') AS createdDate
+		   FROM COMMENTS where POST_NO = #{postNo }
+	</select>
+	
 </mapper>
