@@ -68,14 +68,14 @@ var categoryList = function(index,data)
 var categoryAdd = function(data)
 {
 	var dataNum = dataCount = dataCount+1;
-	var $listDiv= $(".tr-category");
+	var $listDiv= $(".tbl-category"); 
 	var html = "<tr class ='tr-category' id='tr_category" +data.categoryNo+ "'  >"
 		+"<td>"+dataNum+"</td>"
 		+"<td>"+data.categoryName+"</td>"
 		+"<td>"+data.displayType+"</td>"
 		+"<td>"+data.cntDisplayPost+"</td>"
 		+"<td>"+data.description+"</td>"
-		+"<td>&nbsp;<img class ='btn-delete' height='9' src='/jblog/assets/images/delete.jpg' data-no='"+data.categoryNo+"' ></td>"
+		+"<td>&nbsp;<input type='button' class ='btn-delete' height='9' src='/jblog/assets/images/delete.jpg' data-no='"+data.categoryNo+"' value ='삭제'></td>"
 	    +"</tr>";
 	    /* <img calss ='btn-delete' height='9' src='/jblog/assets/images/delete.jpg'> */
 	$listDiv.append(html);
@@ -205,7 +205,7 @@ $(function(){
 	      			<td>설명</td>
 	      			<td>삭제</td>      			
 	      		</tr>
-				
+								
 			</table>
 	      	<table>
 	      		<tr><td height="5">&nbsp;</td></tr>
