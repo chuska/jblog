@@ -2,18 +2,68 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="main">
 
-<select id="searchByTitle" parameterType ="String" resultType="BlogVo">
-select * from blog where title =#{title }
+<!-- <select id="searchByTitle" parameterType ="String" resultType="map">
+select a.blog_no, a.title, b.user_name, a.tag 
+from blog a, blog_user b 
+where a.blog_no=b.user_no AND a.title like('%${title }%')
 </select>
 
-
-<select id="searchByTag" parameterType ="String" resultType="BlogVo">
-select * from blog where tag =#{tag }
+<select id="searchByTag" parameterType ="String" resultType="map">
+select a.blog_no, a.title, b.user_name, a.tag 
+from blog a, blog_user b 
+where a.blog_no=b.user_no AND a.tag like ('%${tag }%')
 </select>
 
+<select id="searchByUserName" parameterType ="String" resultType="map">
+select a.blog_no, a.title, b.user_name, a.tag 
+from blog a, blog_user b 
+where a.blog_no=b.user_no AND b.user_name like ('%${userName }%')
+</select>
+ -->
+ 
+<select id="search" parameterType="map" resultType="map">
+select * from(select rownum as rnum, C.* from(
+select a.blog_no, a.title, b.user_name, a.tag 
+from blog a, blog_user b 
+where a.blog_no=b.user_no AND 
+<choose>
+	<when test="radioValue=='title'">
+		a.title like('%${searchKeyword}%')
+		order by title ASC
+	</when>
+	<when test="radioValue=='tag'">
+		a.tag like('%${searchKeyword }%')
+		order by tag ASC
+	</when>
+	<when test="radioValue=='name'">
+		b.user_name like ('%${searchKeyword }%')
+		order by user_name ASC
+	</when>
+</choose>
+)C  )
+<![CDATA[
+where ( #{page } - 1 ) * #{pageSize } + 1 <= rnum AND rnum <=  #{page } * #{pageSize }
 
-<select id="searchByName" parameterType ="String" resultType="BlogUserVo">
-select * from blog_user where user_name = #{userNam }
+]]>
 </select>
 
+<select id="getCount" parameterType="map" resultType="long">
+select count(*) 
+from blog a, blog_user b 
+where a.blog_no=b.user_no AND
+<choose>
+	<when test="radioValue=='title'">
+		a.title like('%${searchKeyword}%')
+	</when>
+	<when test="radioValue=='tag'">
+		a.tag like('%${searchKeyword }%')
+	</when>
+	<when test="radioValue=='name'">
+		b.user_name like ('%${searchKeyword }%')
+	</when>
+</choose>
+</select>
 </mapper>
+
+
+
